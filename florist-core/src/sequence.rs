@@ -5,6 +5,43 @@ use crate::Error;
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct DNASequence(String);
 
+impl DNASequence {
+    pub fn complement(&self) -> Self {
+        Self(
+            self
+                .chars()
+                .map(|ch| {
+                    match ch {
+                        'A' => 'T',
+                        'T' => 'A',
+                        'C' => 'G',
+                        'G' => 'C',
+                        _ => unreachable!()
+                    }
+                })
+                .collect::<String>()
+        )
+    }
+
+    pub fn reverse_complement(&self) -> Self {
+        Self(
+            self
+                .chars()
+                .rev()
+                .map(|ch| {
+                    match ch {
+                        'A' => 'T',
+                        'T' => 'A',
+                        'C' => 'G',
+                        'G' => 'C',
+                        _ => unreachable!()
+                    }
+                })
+                .collect::<String>()
+        )
+    }
+}
+
 impl Deref for DNASequence {
     type Target = String;
 
