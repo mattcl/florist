@@ -1,0 +1,12 @@
+[workspace]
+
+members = [
+    "florist-core",
+    "florist-plumbing",
+    "florist-solver",
+    "counting-dna-nucleotides",
+    "transcribing-dna-into-rna",
+]
+
+[profile.release]
+lto = true
