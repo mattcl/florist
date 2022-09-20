@@ -3,6 +3,7 @@ use florist_solver::florist_benches;
 
 use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
 use counting_dna_nucleotides::CountingDnaNucleotides;
+use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 
 florist_benches! {
@@ -24,6 +25,12 @@ florist_benches! {
         "Complementing a Strand of DNA",
         "rosalind_revc.txt",
         ComplementingAStrandOfDna
+    ),
+    (
+        rabbits_and_recurrence_relations,
+        "Rabbits and Recurrence Relations",
+        "rosalind_fib.txt",
+        RabbitsAndRecurrenceRelations
     )
 }
 

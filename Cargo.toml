@@ -8,6 +8,7 @@ members = [
     "counting-dna-nucleotides",
     "transcribing-dna-into-rna",
     "complementing-a-strand-of-dna",
+    "rabbits-and-recurrence-relations",
 ]
 
 [profile.release]

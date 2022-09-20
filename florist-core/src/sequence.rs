@@ -8,36 +8,30 @@ pub struct DNASequence(String);
 impl DNASequence {
     pub fn complement(&self) -> Self {
         Self(
-            self
-                .chars()
-                .map(|ch| {
-                    match ch {
-                        'A' => 'T',
-                        'T' => 'A',
-                        'C' => 'G',
-                        'G' => 'C',
-                        _ => unreachable!()
-                    }
+            self.chars()
+                .map(|ch| match ch {
+                    'A' => 'T',
+                    'T' => 'A',
+                    'C' => 'G',
+                    'G' => 'C',
+                    _ => unreachable!(),
                 })
-                .collect::<String>()
+                .collect::<String>(),
         )
     }
 
     pub fn reverse_complement(&self) -> Self {
         Self(
-            self
-                .chars()
+            self.chars()
                 .rev()
-                .map(|ch| {
-                    match ch {
-                        'A' => 'T',
-                        'T' => 'A',
-                        'C' => 'G',
-                        'G' => 'C',
-                        _ => unreachable!()
-                    }
+                .map(|ch| match ch {
+                    'A' => 'T',
+                    'T' => 'A',
+                    'C' => 'G',
+                    'G' => 'C',
+                    _ => unreachable!(),
                 })
-                .collect::<String>()
+                .collect::<String>(),
         )
     }
 }

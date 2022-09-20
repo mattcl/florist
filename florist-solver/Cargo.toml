@@ -10,6 +10,7 @@ florist-plumbing = { path = "../florist-plumbing" }
 counting-dna-nucleotides = { path = "../counting-dna-nucleotides" }
 transcribing-dna-into-rna = { path = "../transcribing-dna-into-rna" }
 complementing-a-strand-of-dna = { path = "../complementing-a-strand-of-dna" }
+rabbits-and-recurrence-relations = { path = "../rabbits-and-recurrence-relations" }
 
 [dev-dependencies]
 criterion = "0.4.0"

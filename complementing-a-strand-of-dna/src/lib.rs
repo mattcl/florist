@@ -1,6 +1,5 @@
-use florist_core::{Error, DNASequence};
+use florist_core::{DNASequence, Error};
 use florist_plumbing::Problem;
-
 
 pub struct ComplementingAStrandOfDna;
 
