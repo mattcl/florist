@@ -1,6 +1,6 @@
 pub mod sequence;
 
-pub use sequence::DNASequence;
+pub use sequence::{DNASequence, RNASequence, GCContent, HammingDistance};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -9,4 +9,10 @@ pub enum Error {
 
     #[error("Invalid character in RNA sequence: {0}")]
     InvalidRNASequence(char),
+
+    #[error("Empty strings are not valid sequences")]
+    EmptySequence,
+
+    #[error("Sequences must be equal in length")]
+    NotEqualLength,
 }

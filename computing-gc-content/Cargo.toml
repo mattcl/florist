@@ -1,10 +1,12 @@
 [package]
-name = "rabbits-and-recurrence-relations"
+name = "computing-gc-content"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = { workspace = true }
+florist-core = { path = "../florist-core" }
+florist-fasta = { path = "../florist-fasta" }
 florist-plumbing = { path = "../florist-plumbing" }
-thiserror = { workspace = true }

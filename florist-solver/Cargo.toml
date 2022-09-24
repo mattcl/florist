@@ -11,6 +11,9 @@ counting-dna-nucleotides = { path = "../counting-dna-nucleotides" }
 transcribing-dna-into-rna = { path = "../transcribing-dna-into-rna" }
 complementing-a-strand-of-dna = { path = "../complementing-a-strand-of-dna" }
 rabbits-and-recurrence-relations = { path = "../rabbits-and-recurrence-relations" }
+computing-gc-content = { path = "../computing-gc-content" }
+counting-point-mutations = { path = "../counting-point-mutations" }
+enumerating-gene-orders = { path = "../enumerating-gene-orders" }
 
 [dev-dependencies]
 criterion = "0.4.0"

@@ -3,13 +3,23 @@
 # members are listed with core libs first, then problem order
 members = [
     "florist-core",
+    "florist-fasta",
     "florist-plumbing",
     "florist-solver",
     "counting-dna-nucleotides",
     "transcribing-dna-into-rna",
     "complementing-a-strand-of-dna",
     "rabbits-and-recurrence-relations",
+    "computing-gc-content",
+    "counting-point-mutations",
+    "enumerating-gene-orders",
 ]
+
+[workspace.dependencies]
+anyhow = "1.0.65"
+itertools = "0.10.5"
+rustc-hash = "1.1.0"
+thiserror = "1.0.35"
 
 [profile.release]
 lto = true

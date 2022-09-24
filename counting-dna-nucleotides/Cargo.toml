@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 florist-core = { path = "../florist-core" }
 florist-plumbing = { path = "../florist-plumbing" }
-rustc-hash = "1.1.0"
+rustc-hash = { workspace = true }
