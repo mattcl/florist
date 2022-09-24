@@ -7,6 +7,7 @@ use counting_dna_nucleotides::CountingDnaNucleotides;
 use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
 use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
+use mendels_first_law::MendelsFirstLaw;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 
@@ -59,6 +60,12 @@ florist_benches! {
         "Enumerating k-mers Lexicographically",
         "rosalind_lexf.txt",
         EnumeratingKMersLexicographically
+    ),
+    (
+        mendels_first_law,
+        "Mendel's First Law",
+        "rosalind_iprb.txt",
+        MendelsFirstLaw
     )
 }
 

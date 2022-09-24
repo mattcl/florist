@@ -62,6 +62,7 @@ mod tests {
     use enumerating_gene_orders::EnumeratingGeneOrders;
     use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
     use florist_plumbing::{load_input_file, Problem};
+    use mendels_first_law::MendelsFirstLaw;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 
@@ -150,5 +151,12 @@ mod tests {
         "rosalind_lexf.txt",
         EnumeratingKMersLexicographically,
         "enumerating_k_mers_lexicographically.txt"
+    );
+
+    test_case!(
+        mendels_first_law,
+        "rosalind_iprb.txt",
+        MendelsFirstLaw,
+        "0.7584388185654007"
     );
 }

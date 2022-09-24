@@ -34,6 +34,7 @@ pub(crate) enum Commands {
     EnumeratingKMersLexicographically(
         Solver<enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically>,
     ),
+    MendelsFirstLaw(Solver<mendels_first_law::MendelsFirstLaw>),
 }
 
 impl Commands {
@@ -48,6 +49,7 @@ impl Commands {
             Self::CountingPointMutations(cmd) => cmd.run(),
             Self::EnumeratingGeneOrders(cmd) => cmd.run(),
             Self::EnumeratingKMersLexicographically(cmd) => cmd.run(),
+            Self::MendelsFirstLaw(cmd) => cmd.run(),
         }
     }
 }

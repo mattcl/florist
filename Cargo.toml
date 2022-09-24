@@ -15,6 +15,7 @@ members = [
     "counting-point-mutations",
     "enumerating-gene-orders",
     "enumerating-k-mers-lexicographically",
+    "mendels-first-law",
 ]
 
 [workspace.dependencies]

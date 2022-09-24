@@ -15,6 +15,7 @@ computing-gc-content = { path = "../computing-gc-content" }
 counting-point-mutations = { path = "../counting-point-mutations" }
 enumerating-gene-orders = { path = "../enumerating-gene-orders" }
 enumerating-k-mers-lexicographically = { path = "../enumerating-k-mers-lexicographically" }
+mendels-first-law = { path = "../mendels-first-law" }
 
 [dev-dependencies]
 criterion = "0.4.0"
