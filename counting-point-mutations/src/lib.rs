@@ -1,8 +1,8 @@
 use std::str::FromStr;
 
 use anyhow::bail;
+use florist_core::{DNASequence, Error, HammingDistance};
 use florist_plumbing::Problem;
-use florist_core::{Error, DNASequence, HammingDistance};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct SequencePair {
@@ -26,12 +26,10 @@ impl FromStr for SequencePair {
             bail!("Invalid input, wrong number of sequences: {}", s);
         }
 
-        Ok(
-            SequencePair {
-                first: parts[0].trim().parse()?,
-                second: parts[1].trim().parse()?
-            }
-        )
+        Ok(SequencePair {
+            first: parts[0].trim().parse()?,
+            second: parts[1].trim().parse()?,
+        })
     }
 }
 

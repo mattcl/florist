@@ -1,4 +1,8 @@
-use std::{collections::HashMap, ops::{Deref, DerefMut}, str::FromStr};
+use std::{
+    collections::HashMap,
+    ops::{Deref, DerefMut},
+    str::FromStr,
+};
 
 #[derive(Debug, Eq, PartialEq, thiserror::Error)]
 pub enum Error {
@@ -91,7 +95,8 @@ TGGGAACCTGCGGGCAGTAGGTGGAAT";
         assert_eq!(parsed.len(), 3);
 
         let mid = parsed.get("Rosalind_5959").unwrap();
-        let expected = "CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCTATATCCATTTGTCAGCAGACACGC";
+        let expected =
+            "CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCTATATCCATTTGTCAGCAGACACGC";
         assert_eq!(mid, expected);
     }
 

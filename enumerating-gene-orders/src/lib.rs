@@ -1,8 +1,10 @@
-use std::{fmt::Display, ops::{Deref, DerefMut}};
 use itertools::{join, Itertools};
+use std::{
+    fmt::Display,
+    ops::{Deref, DerefMut},
+};
 
 use florist_plumbing::Problem;
-
 
 #[derive(Debug, Clone, Default, Eq, PartialEq)]
 pub struct Permutation(Vec<u32>);
@@ -20,7 +22,6 @@ impl Display for Permutation {
         join(&self.0, " ").fmt(f)
     }
 }
-
 
 #[derive(Debug, Clone, Default, Eq, PartialEq)]
 pub struct Permutations(Vec<Permutation>);
@@ -45,7 +46,6 @@ impl Display for Permutations {
     }
 }
 
-
 pub struct EnumeratingGeneOrders;
 
 impl Problem for EnumeratingGeneOrders {
@@ -56,9 +56,7 @@ impl Problem for EnumeratingGeneOrders {
     fn solve(input: Self::Input) -> Result<Self::Output, Self::Error> {
         let raw = (1..=input)
             .permutations(input as usize)
-            .map(|p| {
-                Permutation(p)
-            })
+            .map(|p| Permutation(p))
             .collect::<Vec<_>>();
 
         Ok(Permutations(raw))

@@ -1,10 +1,9 @@
 use std::{fmt::Display, str::FromStr};
 
-use anyhow::{Result, anyhow};
-use florist_core::{DNASequence, GCContent, Error};
+use anyhow::{anyhow, Result};
+use florist_core::{DNASequence, Error, GCContent};
 use florist_fasta::MultiFasta;
 use florist_plumbing::Problem;
-
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Output {
@@ -38,7 +37,10 @@ impl Problem for ComputingGcContent {
             .max_by(|a, b| a.1.partial_cmp(&b.1).unwrap_or(std::cmp::Ordering::Equal))
             .ok_or_else(|| anyhow!("No sequences"))?;
 
-        Ok(Output { description: desc.to_string(), gc_content: *gc })
+        Ok(Output {
+            description: desc.to_string(),
+            gc_content: *gc,
+        })
     }
 }
 

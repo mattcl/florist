@@ -1,7 +1,7 @@
 use std::{marker::PhantomData, path::PathBuf, str::FromStr};
 
-use anyhow::{Result, Context};
-use clap::{Parser, CommandFactory, Subcommand, Args};
+use anyhow::{Context, Result};
+use clap::{Args, CommandFactory, Parser, Subcommand};
 use clap_complete::{generate, shells::Zsh};
 use florist_plumbing::Problem;
 
@@ -25,7 +25,9 @@ pub(crate) enum Commands {
     CountingDnaNucleotides(Solver<counting_dna_nucleotides::CountingDnaNucleotides>),
     TranscribingDnaIntoRna(Solver<transcribing_dna_into_rna::TranscribingDnaIntoRna>),
     ComplementingAStrandOfDna(Solver<complementing_a_strand_of_dna::ComplementingAStrandOfDna>),
-    RabbitsAndRecurrenceRelations(Solver<rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations>),
+    RabbitsAndRecurrenceRelations(
+        Solver<rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations>,
+    ),
     ComputingGcContent(Solver<computing_gc_content::ComputingGcContent>),
     CountingPointMutations(Solver<counting_point_mutations::CountingPointMutations>),
     EnumeratingGeneOrders(Solver<enumerating_gene_orders::EnumeratingGeneOrders>),
@@ -52,7 +54,7 @@ pub(crate) struct Solver<T> {
     input: PathBuf,
 
     #[clap(skip)]
-    _phantom: PhantomData<T>
+    _phantom: PhantomData<T>,
 }
 
 impl<T> Solver<T>
@@ -64,8 +66,12 @@ where
     pub fn run(&self) -> Result<()> {
         let input_raw = std::fs::read_to_string(&self.input).context("Failed to read input")?;
         // yeah, this is nuts, maybe revisit what these bounds have to actually be
-        let input = T::input_from(input_raw.trim()).map_err(Into::<anyhow::Error>::into).context("Failed to parse input")?;
-        let output = T::solve(input).map_err(Into::<anyhow::Error>::into).context("Failed to solve")?;
+        let input = T::input_from(input_raw.trim())
+            .map_err(Into::<anyhow::Error>::into)
+            .context("Failed to parse input")?;
+        let output = T::solve(input)
+            .map_err(Into::<anyhow::Error>::into)
+            .context("Failed to solve")?;
         println!("{}", output);
         Ok(())
     }

@@ -139,7 +139,7 @@ impl GCContent for RNASequence {
     }
 }
 
-pub trait HammingDistance<Other=Self> {
+pub trait HammingDistance<Other = Self> {
     type Error;
 
     fn hamming_distance(&self, other: &Other) -> Result<u64, Self::Error>;

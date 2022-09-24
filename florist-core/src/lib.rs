@@ -1,6 +1,6 @@
 pub mod sequence;
 
-pub use sequence::{DNASequence, RNASequence, GCContent, HammingDistance};
+pub use sequence::{DNASequence, GCContent, HammingDistance, RNASequence};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
