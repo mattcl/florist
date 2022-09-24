@@ -2,6 +2,7 @@
 
 # members are listed with core libs first, then problem order
 members = [
+    "florist-cli",
     "florist-core",
     "florist-fasta",
     "florist-plumbing",

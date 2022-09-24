@@ -3,7 +3,7 @@ use std::{fmt::Display, io, path::Path, str::FromStr};
 /// Indicates the following structure represents a problem solution.
 pub trait Problem {
     /// The error type when solving this problem.
-    type Error;
+    type Error: Send + Sync + 'static;
 
     /// The input type when solving this problem.
     type Input: FromStr;

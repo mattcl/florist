@@ -1,0 +1,25 @@
+[package]
+name = "florist-cli"
+version = "0.1.0"
+edition = "2021"
+description = "Rosalind problem solver"
+
+[[bin]]
+name = "florist"
+path = "src/main.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { version = "=3.2.22", features = ["cargo", "derive", "wrap_help"] }
+clap_complete = "=3.2.5"
+florist-plumbing = { path = "../florist-plumbing" }
+# solvers
+counting-dna-nucleotides = { path = "../counting-dna-nucleotides" }
+transcribing-dna-into-rna = { path = "../transcribing-dna-into-rna" }
+complementing-a-strand-of-dna = { path = "../complementing-a-strand-of-dna" }
+rabbits-and-recurrence-relations = { path = "../rabbits-and-recurrence-relations" }
+computing-gc-content = { path = "../computing-gc-content" }
+counting-point-mutations = { path = "../counting-point-mutations" }
+enumerating-gene-orders = { path = "../enumerating-gene-orders" }
