@@ -22,7 +22,6 @@ impl Cli {
 #[derive(Subcommand)]
 pub(crate) enum Commands {
     GenerateCompletions(GenerateCompletions),
-
     CountingDnaNucleotides(Solver<counting_dna_nucleotides::CountingDnaNucleotides>),
     TranscribingDnaIntoRna(Solver<transcribing_dna_into_rna::TranscribingDnaIntoRna>),
     ComplementingAStrandOfDna(Solver<complementing_a_strand_of_dna::ComplementingAStrandOfDna>),
