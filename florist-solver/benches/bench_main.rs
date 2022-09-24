@@ -6,6 +6,7 @@ use computing_gc_content::ComputingGcContent;
 use counting_dna_nucleotides::CountingDnaNucleotides;
 use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
+use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 
@@ -52,6 +53,12 @@ florist_benches! {
         "Enumerating Gene Orders",
         "rosalind_perm.txt",
         EnumeratingGeneOrders
+    ),
+    (
+        enumerating_k_mers_lexicographically,
+        "Enumerating k-mers Lexicographically",
+        "rosalind_lexf.txt",
+        EnumeratingKMersLexicographically
     )
 }
 

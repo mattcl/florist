@@ -31,6 +31,9 @@ pub(crate) enum Commands {
     ComputingGcContent(Solver<computing_gc_content::ComputingGcContent>),
     CountingPointMutations(Solver<counting_point_mutations::CountingPointMutations>),
     EnumeratingGeneOrders(Solver<enumerating_gene_orders::EnumeratingGeneOrders>),
+    EnumeratingKMersLexicographically(
+        Solver<enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically>,
+    ),
 }
 
 impl Commands {
@@ -44,6 +47,7 @@ impl Commands {
             Self::ComputingGcContent(cmd) => cmd.run(),
             Self::CountingPointMutations(cmd) => cmd.run(),
             Self::EnumeratingGeneOrders(cmd) => cmd.run(),
+            Self::EnumeratingKMersLexicographically(cmd) => cmd.run(),
         }
     }
 }

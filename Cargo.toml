@@ -14,6 +14,7 @@ members = [
     "computing-gc-content",
     "counting-point-mutations",
     "enumerating-gene-orders",
+    "enumerating-k-mers-lexicographically",
 ]
 
 [workspace.dependencies]

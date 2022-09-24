@@ -14,6 +14,7 @@ rabbits-and-recurrence-relations = { path = "../rabbits-and-recurrence-relations
 computing-gc-content = { path = "../computing-gc-content" }
 counting-point-mutations = { path = "../counting-point-mutations" }
 enumerating-gene-orders = { path = "../enumerating-gene-orders" }
+enumerating-k-mers-lexicographically = { path = "../enumerating-k-mers-lexicographically" }
 
 [dev-dependencies]
 criterion = "0.4.0"
