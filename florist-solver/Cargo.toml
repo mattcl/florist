@@ -16,6 +16,7 @@ counting-point-mutations = { path = "../counting-point-mutations" }
 enumerating-gene-orders = { path = "../enumerating-gene-orders" }
 enumerating-k-mers-lexicographically = { path = "../enumerating-k-mers-lexicographically" }
 mendels-first-law = { path = "../mendels-first-law" }
+translating-rna-into-protein = { path = "../translating-rna-into-protein" }
 
 [dev-dependencies]
 criterion = "0.4.0"

@@ -65,6 +65,7 @@ mod tests {
     use mendels_first_law::MendelsFirstLaw;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
+    use translating_rna_into_protein::TranslatingRnaIntoProtein;
 
     macro_rules! test_case {
         ($name:ident, $file:literal, $solver:ty, $expected:literal) => {
@@ -158,5 +159,12 @@ mod tests {
         "rosalind_iprb.txt",
         MendelsFirstLaw,
         "0.7584388185654007"
+    );
+
+    test_case_extern_solution!(
+        translating_rna_into_protein,
+        "rosalind_prot.txt",
+        TranslatingRnaIntoProtein,
+        "translating_rna_into_protein.txt"
     );
 }

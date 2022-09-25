@@ -16,6 +16,7 @@ members = [
     "enumerating-gene-orders",
     "enumerating-k-mers-lexicographically",
     "mendels-first-law",
+    "translating-rna-into-protein",
 ]
 
 [workspace.dependencies]

@@ -10,6 +10,7 @@ use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
 use mendels_first_law::MendelsFirstLaw;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
+use translating_rna_into_protein::TranslatingRnaIntoProtein;
 
 florist_benches! {
     10,
@@ -66,6 +67,12 @@ florist_benches! {
         "Mendel's First Law",
         "rosalind_iprb.txt",
         MendelsFirstLaw
+    ),
+    (
+        translating_rna_into_protein,
+        "Translating RNA into Protein",
+        "rosalind_prot.txt",
+        TranslatingRnaIntoProtein
     )
 }
 

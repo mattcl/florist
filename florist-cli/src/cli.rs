@@ -35,6 +35,7 @@ pub(crate) enum Commands {
         Solver<enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically>,
     ),
     MendelsFirstLaw(Solver<mendels_first_law::MendelsFirstLaw>),
+    TranslatingRnaIntoProtein(Solver<translating_rna_into_protein::TranslatingRnaIntoProtein>),
 }
 
 impl Commands {
@@ -50,6 +51,7 @@ impl Commands {
             Self::EnumeratingGeneOrders(cmd) => cmd.run(),
             Self::EnumeratingKMersLexicographically(cmd) => cmd.run(),
             Self::MendelsFirstLaw(cmd) => cmd.run(),
+            Self::TranslatingRnaIntoProtein(cmd) => cmd.run(),
         }
     }
 }
