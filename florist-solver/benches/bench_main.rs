@@ -1,6 +1,7 @@
 use criterion::criterion_main;
 use florist_solver::florist_benches;
 
+use calculating_protein_mass::CalculatingProteinMass;
 use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
 use computing_gc_content::ComputingGcContent;
 use counting_dna_nucleotides::CountingDnaNucleotides;
@@ -73,6 +74,12 @@ florist_benches! {
         "Translating RNA into Protein",
         "rosalind_prot.txt",
         TranslatingRnaIntoProtein
+    ),
+    (
+        calculating_protein_mass,
+        "Calculating Protein Mass",
+        "rosalind_prtm.txt",
+        CalculatingProteinMass
     )
 }
 

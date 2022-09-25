@@ -26,3 +26,4 @@ enumerating-gene-orders = { path = "../enumerating-gene-orders" }
 enumerating-k-mers-lexicographically = { path = "../enumerating-k-mers-lexicographically" }
 mendels-first-law = { path = "../mendels-first-law" }
 translating-rna-into-protein = { path = "../translating-rna-into-protein" }
+calculating-protein-mass = { path = "../calculating-protein-mass" }

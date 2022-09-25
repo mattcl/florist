@@ -54,6 +54,62 @@ impl AminoAcid {
             _ => 'X',
         }
     }
+
+    pub fn monoisotopic_mass(&self) -> f64 {
+        match self {
+            Self::Alanine => 71.03711,
+            Self::Arginine => 156.10111,
+            Self::Asparagine => 114.04293,
+            Self::AsparticAcid => 115.02694,
+            Self::Cysteine => 103.00919,
+            Self::GlutamicAcid => 129.04259,
+            Self::Glutamine => 128.05858,
+            Self::Glycine => 57.02146,
+            Self::Histidine => 137.05891,
+            Self::Isoleucine => 113.08406,
+            Self::Leucine => 113.08406,
+            Self::Lysine => 128.09496,
+            Self::Methionine => 131.04049,
+            Self::Phenylalanine => 147.06841,
+            Self::Proline => 97.05276,
+            Self::Serine => 87.03203,
+            Self::Threonine => 101.04768,
+            Self::Tryptophan => 186.07931,
+            Self::Tyrosine => 163.06333,
+            Self::Valine => 99.06841,
+            _ => 0.0,
+        }
+    }
+}
+
+impl TryFrom<char> for AminoAcid {
+    type Error = Error;
+
+    fn try_from(value: char) -> Result<Self, Self::Error> {
+        Ok(match value {
+            'A' => AminoAcid::Alanine,
+            'R' => AminoAcid::Arginine,
+            'N' => AminoAcid::Asparagine,
+            'D' => AminoAcid::AsparticAcid,
+            'C' => AminoAcid::Cysteine,
+            'E' => AminoAcid::GlutamicAcid,
+            'Q' => AminoAcid::Glutamine,
+            'G' => AminoAcid::Glycine,
+            'H' => AminoAcid::Histidine,
+            'I' => AminoAcid::Isoleucine,
+            'L' => AminoAcid::Leucine,
+            'K' => AminoAcid::Lysine,
+            'M' => AminoAcid::Methionine,
+            'F' => AminoAcid::Phenylalanine,
+            'P' => AminoAcid::Proline,
+            'S' => AminoAcid::Serine,
+            'T' => AminoAcid::Threonine,
+            'W' => AminoAcid::Tryptophan,
+            'Y' => AminoAcid::Tyrosine,
+            'V' => AminoAcid::Valine,
+            _ => return Err(Error::UnknownAminoAcid(value)),
+        })
+    }
 }
 
 impl TryFrom<DNACodon> for AminoAcid {

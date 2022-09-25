@@ -55,6 +55,7 @@ macro_rules! florist_benches {
 mod tests {
     use std::path::Path;
 
+    use calculating_protein_mass::CalculatingProteinMass;
     use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
     use computing_gc_content::ComputingGcContent;
     use counting_dna_nucleotides::CountingDnaNucleotides;
@@ -166,5 +167,12 @@ mod tests {
         "rosalind_prot.txt",
         TranslatingRnaIntoProtein,
         "translating_rna_into_protein.txt"
+    );
+
+    test_case!(
+        calculating_protein_mass,
+        "rosalind_prtm.txt",
+        CalculatingProteinMass,
+        "117772.67882000057"
     );
 }

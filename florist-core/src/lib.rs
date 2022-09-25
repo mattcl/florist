@@ -37,4 +37,7 @@ pub enum Error {
 
     #[error("Invalid character in RNA codon: {0}")]
     InvalidRNACodon(char),
+
+    #[error("Cannot reconstruct amino acid from: {0}")]
+    UnknownAminoAcid(char),
 }

@@ -197,6 +197,17 @@ impl HammingDistance for RNASequence {
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct ProteinSequence(String);
 
+impl ProteinSequence {
+    pub fn monoisotopic_mass(&self) -> f64 {
+        self.chars()
+            // since we validate the protein construction, we should not be in
+            // a situation where we fail here
+            .map(|ch| AminoAcid::try_from(ch).expect("Should not have been possible"))
+            .map(|acid| acid.monoisotopic_mass())
+            .sum()
+    }
+}
+
 impl Deref for ProteinSequence {
     type Target = String;
 
