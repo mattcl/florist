@@ -1,8 +1,9 @@
 use std::{
     fmt::Display,
+    hash::Hash,
     iter::Map,
     ops::Deref,
-    str::{Chars, FromStr}, hash::Hash,
+    str::{Chars, FromStr},
 };
 
 use itertools::{Itertools, Tuples};

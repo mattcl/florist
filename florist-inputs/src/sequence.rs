@@ -1,9 +1,15 @@
-use std::{ops::{Deref, DerefMut}, str::FromStr, fmt::Display};
+use std::{
+    fmt::Display,
+    ops::{Deref, DerefMut},
+    str::FromStr,
+};
 
-use florist_core::{Sequence, DNASequence, ProteinSequence, RNASequence};
+use florist_core::{DNASequence, ProteinSequence, RNASequence, Sequence};
 
 #[derive(Debug, Clone, Default, Eq, PartialEq)]
-pub struct SequenceList<T>(Vec<T>) where T: Sequence;
+pub struct SequenceList<T>(Vec<T>)
+where
+    T: Sequence;
 
 impl<T: Sequence> Deref for SequenceList<T> {
     type Target = Vec<T>;
@@ -23,21 +29,23 @@ impl<T: Sequence> FromStr for SequenceList<T> {
     type Err = <T as FromStr>::Err;
 
     fn from_str(sequences: &str) -> Result<Self, Self::Err> {
-        Ok(
-            Self(
-                sequences
-                    .trim()
-                    .split("\n")
-                    .map(|s| s.trim().parse())
-                    .collect::<Result<Vec<T>, _>>()?
-            )
-        )
+        Ok(Self(
+            sequences
+                .trim()
+                .split("\n")
+                .map(|s| s.trim().parse())
+                .collect::<Result<Vec<T>, _>>()?,
+        ))
     }
 }
 
 impl<T: Sequence> Display for SequenceList<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let out = self.iter().map(|s| s.to_string()).collect::<Vec<_>>().join("\n");
+        let out = self
+            .iter()
+            .map(|s| s.to_string())
+            .collect::<Vec<_>>()
+            .join("\n");
         out.fmt(f)
     }
 }

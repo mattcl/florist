@@ -1,18 +1,14 @@
 pub mod amino;
 pub mod codon;
+pub mod population;
 pub mod sequence;
 
 pub use amino::AminoAcid;
 pub use codon::{DNACodon, RNACodon};
+pub use population::SingleGenePopulation;
 pub use sequence::{
+    DNASequence, GCContent, GeneticSequence, HammingDistance, Motif, ProteinSequence, RNASequence,
     Sequence,
-    DNASequence,
-    GCContent,
-    GeneticSequence,
-    HammingDistance,
-    RNASequence,
-    ProteinSequence,
-    Motif,
 };
 
 #[derive(Debug, thiserror::Error)]
@@ -49,4 +45,7 @@ pub enum Error {
 
     #[error("Cannot reconstruct amino acid from: {0}")]
     UnknownAminoAcid(char),
+
+    #[error("Wrong number of values. Expected {desired} but got {actual}")]
+    WrongNumberOfValues { desired: usize, actual: usize },
 }

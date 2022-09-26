@@ -1,6 +1,7 @@
 use criterion::criterion_main;
 use florist_solver::florist_benches;
 
+use calculating_expected_offspring::CalculatingExpectedOffspring;
 use calculating_protein_mass::CalculatingProteinMass;
 use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
 use computing_gc_content::ComputingGcContent;
@@ -87,6 +88,12 @@ florist_benches! {
         "Finding a Motif in DNA",
         "rosalind_subs.txt",
         FindingAMotifInDna
+    ),
+    (
+        calculating_expected_offspring,
+        "Calculating Expected Offspring",
+        "rosalind_iev.txt",
+        CalculatingExpectedOffspring
     )
 }
 

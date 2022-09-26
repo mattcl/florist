@@ -55,6 +55,7 @@ macro_rules! florist_benches {
 mod tests {
     use std::path::Path;
 
+    use calculating_expected_offspring::CalculatingExpectedOffspring;
     use calculating_protein_mass::CalculatingProteinMass;
     use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
     use computing_gc_content::ComputingGcContent;
@@ -182,5 +183,12 @@ mod tests {
         "rosalind_subs.txt",
         FindingAMotifInDna,
         "89 104 111 140 176 227 255 262 269 301 359 370 397 428 456 475 510 601 608 637 644 651 658 694 747 804"
+    );
+
+    test_case!(
+        calculating_expected_offspring,
+        "rosalind_iev.txt",
+        CalculatingExpectedOffspring,
+        "147988"
     );
 }

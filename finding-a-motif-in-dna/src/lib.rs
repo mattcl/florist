@@ -16,7 +16,12 @@ impl From<Vec<usize>> for MotifLocations {
 
 impl Display for MotifLocations {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.0.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(" ").fmt(f)
+        self.0
+            .iter()
+            .map(|i| i.to_string())
+            .collect::<Vec<_>>()
+            .join(" ")
+            .fmt(f)
     }
 }
 
@@ -32,14 +37,12 @@ impl Problem for FindingAMotifInDna {
             bail!("Input is not the right number (2) of sequences");
         }
 
-        Ok(
-            input[0]
-                .motif_lcoations(&input[1])
-                .iter()
-                .map(|v| v + 1)
-                .collect::<Vec<_>>()
-                .into()
-        )
+        Ok(input[0]
+            .motif_lcoations(&input[1])
+            .iter()
+            .map(|v| v + 1)
+            .collect::<Vec<_>>()
+            .into())
     }
 }
 
@@ -58,5 +61,4 @@ ATAT";
         let output = FindingAMotifInDna::solve(input).unwrap();
         assert_eq!(output.to_string(), "2 4 10")
     }
-
 }
