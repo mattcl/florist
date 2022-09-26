@@ -29,3 +29,4 @@ translating-rna-into-protein = { path = "../translating-rna-into-protein" }
 calculating-protein-mass = { path = "../calculating-protein-mass" }
 finding-a-motif-in-dna = { path = "../finding-a-motif-in-dna" }
 calculating-expected-offspring = { path = "../calculating-expected-offspring" }
+locating-restriction-sites = { path = "../locating-restriction-sites" }

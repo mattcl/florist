@@ -65,6 +65,7 @@ mod tests {
     use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
     use finding_a_motif_in_dna::FindingAMotifInDna;
     use florist_plumbing::{load_input_file, Problem};
+    use locating_restriction_sites::LocatingRestrictionSites;
     use mendels_first_law::MendelsFirstLaw;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
@@ -190,5 +191,12 @@ mod tests {
         "rosalind_iev.txt",
         CalculatingExpectedOffspring,
         "147988"
+    );
+
+    test_case_extern_solution!(
+        locating_restriction_sites,
+        "rosalind_revp.txt",
+        LocatingRestrictionSites,
+        "locating_restriction_sites.txt"
     );
 }

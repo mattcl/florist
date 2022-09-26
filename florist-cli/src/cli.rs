@@ -37,6 +37,10 @@ pub(crate) enum Commands {
     MendelsFirstLaw(Solver<mendels_first_law::MendelsFirstLaw>),
     TranslatingRnaIntoProtein(Solver<translating_rna_into_protein::TranslatingRnaIntoProtein>),
     FindingAMotifInDna(Solver<finding_a_motif_in_dna::FindingAMotifInDna>),
+    CalculatingExpectedOffspring(
+        Solver<calculating_expected_offspring::CalculatingExpectedOffspring>,
+    ),
+    LocatingRestrictionSites(Solver<locating_restriction_sites::LocatingRestrictionSites>),
 }
 
 impl Commands {
@@ -54,6 +58,8 @@ impl Commands {
             Self::MendelsFirstLaw(cmd) => cmd.run(),
             Self::TranslatingRnaIntoProtein(cmd) => cmd.run(),
             Self::FindingAMotifInDna(cmd) => cmd.run(),
+            Self::CalculatingExpectedOffspring(cmd) => cmd.run(),
+            Self::LocatingRestrictionSites(cmd) => cmd.run(),
         }
     }
 }

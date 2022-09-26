@@ -10,6 +10,7 @@ use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
 use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
 use finding_a_motif_in_dna::FindingAMotifInDna;
+use locating_restriction_sites::LocatingRestrictionSites;
 use mendels_first_law::MendelsFirstLaw;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
@@ -94,6 +95,12 @@ florist_benches! {
         "Calculating Expected Offspring",
         "rosalind_iev.txt",
         CalculatingExpectedOffspring
+    ),
+    (
+        locating_restriction_sites,
+        "Locating Restriction Sites",
+        "rosalind_revp.txt",
+        LocatingRestrictionSites
     )
 }
 

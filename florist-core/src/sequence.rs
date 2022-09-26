@@ -44,6 +44,10 @@ impl DNASequence {
                 .collect::<String>(),
         )
     }
+
+    pub fn subsequence_unchecked(&self, start: usize, end: usize) -> Self {
+        Self(String::from_utf8_lossy(&self.as_bytes()[start..end]).into())
+    }
 }
 
 impl Sequence for DNASequence {}
@@ -77,6 +81,24 @@ impl FromStr for DNASequence {
         }
 
         Ok(Self(s.into()))
+    }
+}
+
+impl TryFrom<String> for DNASequence {
+    type Error = Error;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if value.is_empty() {
+            return Err(Error::EmptySequence);
+        }
+
+        for ch in value.chars() {
+            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'T') {
+                return Err(Error::InvalidDNASequence(ch));
+            }
+        }
+
+        Ok(Self(value))
     }
 }
 
@@ -114,6 +136,24 @@ impl FromStr for RNASequence {
         }
 
         Ok(Self(s.into()))
+    }
+}
+
+impl TryFrom<String> for RNASequence {
+    type Error = Error;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if value.is_empty() {
+            return Err(Error::EmptySequence);
+        }
+
+        for ch in value.chars() {
+            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'U') {
+                return Err(Error::InvalidRNASequence(ch));
+            }
+        }
+
+        Ok(Self(value))
     }
 }
 
@@ -254,6 +294,32 @@ impl FromStr for ProteinSequence {
         }
 
         Ok(Self(s.into()))
+    }
+}
+
+impl TryFrom<String> for ProteinSequence {
+    type Error = Error;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if value.is_empty() {
+            return Err(Error::EmptySequence);
+        }
+
+        for ch in value.chars() {
+            if !ch.is_ascii_uppercase()
+                || !ch.is_ascii_alphabetic()
+                || ch == 'B'
+                || ch == 'J'
+                || ch == 'O'
+                || ch == 'U'
+                || ch == 'X'
+                || ch == 'Z'
+            {
+                return Err(Error::InvalidProteinSequence(ch));
+            }
+        }
+
+        Ok(Self(value))
     }
 }
 
