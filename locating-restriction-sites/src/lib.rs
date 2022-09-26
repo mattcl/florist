@@ -53,19 +53,18 @@ impl Problem for LocatingRestrictionSites {
         let comp_bytes = comp.as_bytes();
 
         let points: Vec<(usize, usize)> = (4..=12)
+            .step_by(2)
             .flat_map(|window| {
-                (0..(len - window + 1))
-                    .filter_map(|idx| {
-                        let comp_start = len - window - idx;
-                        let comp_end = len - idx;
-                        if seq_bytes[idx..(idx + window)] == comp_bytes[comp_start..comp_end] {
-                            // seriously, who indexes things starting at 1
-                            Some((idx + 1, window))
-                        } else {
-                            None
-                        }
-                    })
-                    .collect::<Vec<_>>()
+                (0..(len - window + 1)).filter_map(move |idx| {
+                    let comp_start = len - window - idx;
+                    let comp_end = len - idx;
+                    if seq_bytes[idx..(idx + window)] == comp_bytes[comp_start..comp_end] {
+                        // seriously, who indexes things starting at 1
+                        Some((idx + 1, window))
+                    } else {
+                        None
+                    }
+                })
             })
             .collect();
 
