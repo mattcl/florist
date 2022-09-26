@@ -4,7 +4,16 @@ pub mod sequence;
 
 pub use amino::AminoAcid;
 pub use codon::{DNACodon, RNACodon};
-pub use sequence::{DNASequence, GCContent, GeneticSequence, HammingDistance, RNASequence};
+pub use sequence::{
+    Sequence,
+    DNASequence,
+    GCContent,
+    GeneticSequence,
+    HammingDistance,
+    RNASequence,
+    ProteinSequence,
+    Motif,
+};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

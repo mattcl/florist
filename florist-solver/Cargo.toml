@@ -18,6 +18,7 @@ enumerating-k-mers-lexicographically = { path = "../enumerating-k-mers-lexicogra
 mendels-first-law = { path = "../mendels-first-law" }
 translating-rna-into-protein = { path = "../translating-rna-into-protein" }
 calculating-protein-mass = { path = "../calculating-protein-mass" }
+finding-a-motif-in-dna = { path = "../finding-a-motif-in-dna" }
 
 [dev-dependencies]
 criterion = "0.4.0"

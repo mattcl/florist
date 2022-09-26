@@ -62,6 +62,7 @@ mod tests {
     use counting_point_mutations::CountingPointMutations;
     use enumerating_gene_orders::EnumeratingGeneOrders;
     use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
+    use finding_a_motif_in_dna::FindingAMotifInDna;
     use florist_plumbing::{load_input_file, Problem};
     use mendels_first_law::MendelsFirstLaw;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
@@ -174,5 +175,12 @@ mod tests {
         "rosalind_prtm.txt",
         CalculatingProteinMass,
         "117772.67882000057"
+    );
+
+    test_case!(
+        finding_a_motif_in_dna,
+        "rosalind_subs.txt",
+        FindingAMotifInDna,
+        "89 104 111 140 176 227 255 262 269 301 359 370 397 428 456 475 510 601 608 637 644 651 658 694 747 804"
     );
 }

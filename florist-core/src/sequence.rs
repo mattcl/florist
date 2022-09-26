@@ -2,12 +2,14 @@ use std::{
     fmt::Display,
     iter::Map,
     ops::Deref,
-    str::{Chars, FromStr},
+    str::{Chars, FromStr}, hash::Hash,
 };
 
 use itertools::{Itertools, Tuples};
 
 use crate::{AminoAcid, DNACodon, Error, RNACodon};
+
+pub trait Sequence: FromStr + Display + std::fmt::Debug + Clone + Eq + PartialEq + Hash {}
 
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct DNASequence(String);
@@ -43,6 +45,8 @@ impl DNASequence {
     }
 }
 
+impl Sequence for DNASequence {}
+
 impl Deref for DNASequence {
     type Target = String;
 
@@ -77,6 +81,8 @@ impl FromStr for DNASequence {
 
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct RNASequence(String);
+
+impl Sequence for RNASequence {}
 
 impl Deref for RNASequence {
     type Target = String;
@@ -208,6 +214,8 @@ impl ProteinSequence {
     }
 }
 
+impl Sequence for ProteinSequence {}
+
 impl Deref for ProteinSequence {
     type Target = String;
 
@@ -316,5 +324,34 @@ impl TryFrom<&RNASequence> for ProteinSequence {
 
     fn try_from(value: &RNASequence) -> Result<Self, Self::Error> {
         value.to_protein()
+    }
+}
+
+pub trait Motif {
+    fn motif_lcoations(&self, motif: &Self) -> Vec<usize>;
+}
+
+impl Motif for DNASequence {
+    fn motif_lcoations(&self, motif: &Self) -> Vec<usize> {
+        // we know we only allow a small subset of ascii chars, so the bytes in
+        // the sequence and motif are going to be individual chars.
+        let needle = motif.as_bytes();
+        let haystack = self.as_bytes();
+
+        let len = haystack.len();
+        let size = needle.len();
+        let mut indicies = Vec::new();
+
+        if len < size {
+            return indicies;
+        }
+
+        for i in 0..(len - size + 1) {
+            if &haystack[i..(i + size)] == needle {
+                indicies.push(i);
+            }
+        }
+
+        indicies
     }
 }

@@ -5,6 +5,7 @@ members = [
     "florist-cli",
     "florist-core",
     "florist-fasta",
+    "florist-inputs",
     "florist-plumbing",
     "florist-solver",
     "counting-dna-nucleotides",
@@ -18,6 +19,7 @@ members = [
     "mendels-first-law",
     "translating-rna-into-protein",
     "calculating-protein-mass",
+    "finding-a-motif-in-dna",
 ]
 
 [workspace.dependencies]
