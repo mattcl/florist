@@ -22,6 +22,7 @@ members = [
     "finding-a-motif-in-dna",
     "calculating-expected-offspring",
     "locating-restriction-sites",
+    "mortal-fibonacci-rabbits",
 ]
 
 [workspace.dependencies]

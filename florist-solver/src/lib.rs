@@ -67,6 +67,7 @@ mod tests {
     use florist_plumbing::{load_input_file, Problem};
     use locating_restriction_sites::LocatingRestrictionSites;
     use mendels_first_law::MendelsFirstLaw;
+    use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
     use translating_rna_into_protein::TranslatingRnaIntoProtein;
@@ -198,5 +199,16 @@ mod tests {
         "rosalind_revp.txt",
         LocatingRestrictionSites,
         "locating_restriction_sites.txt"
+    );
+
+    // Man, the authors didn't even mention that they could give inputs that
+    // would overflow 64 bit unsigned integers. That's actually pretty awful,
+    // considering the problem came out almost a decade ago. This would explain
+    // why I got this "wrong" several times.
+    test_case!(
+        mortal_fibonacci_rabbits,
+        "rosalind_fibd.txt",
+        MortalFibonacciRabbits,
+        "258314806822396236"
     );
 }

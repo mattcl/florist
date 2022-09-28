@@ -41,6 +41,7 @@ pub(crate) enum Commands {
         Solver<calculating_expected_offspring::CalculatingExpectedOffspring>,
     ),
     LocatingRestrictionSites(Solver<locating_restriction_sites::LocatingRestrictionSites>),
+    MortalFibonacciRabbits(Solver<mortal_fibonacci_rabbits::MortalFibonacciRabbits>),
 }
 
 impl Commands {
@@ -60,6 +61,7 @@ impl Commands {
             Self::FindingAMotifInDna(cmd) => cmd.run(),
             Self::CalculatingExpectedOffspring(cmd) => cmd.run(),
             Self::LocatingRestrictionSites(cmd) => cmd.run(),
+            Self::MortalFibonacciRabbits(cmd) => cmd.run(),
         }
     }
 }

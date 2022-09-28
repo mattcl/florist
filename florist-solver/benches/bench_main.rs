@@ -12,6 +12,7 @@ use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
 use finding_a_motif_in_dna::FindingAMotifInDna;
 use locating_restriction_sites::LocatingRestrictionSites;
 use mendels_first_law::MendelsFirstLaw;
+use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 use translating_rna_into_protein::TranslatingRnaIntoProtein;
@@ -101,6 +102,12 @@ florist_benches! {
         "Locating Restriction Sites",
         "rosalind_revp.txt",
         LocatingRestrictionSites
+    ),
+    (
+        mortal_fibonacci_rabbits,
+        "Mortal Fibonacci Rabbits",
+        "rosalind_fibd.txt",
+        MortalFibonacciRabbits
     )
 }
 
