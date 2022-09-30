@@ -25,6 +25,7 @@ members = [
     "mortal-fibonacci-rabbits",
     "inferring-mrna-from-protein",
     "independent-alleles",
+    "overlap-graphs",
 ]
 
 [workspace.dependencies]

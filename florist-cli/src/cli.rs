@@ -44,6 +44,7 @@ pub(crate) enum Commands {
     MortalFibonacciRabbits(Solver<mortal_fibonacci_rabbits::MortalFibonacciRabbits>),
     InferringMrnaFromProtein(Solver<inferring_mrna_from_protein::InferringMrnaFromProtein>),
     IndependentAlleles(Solver<independent_alleles::IndependentAlleles>),
+    OverlapGraphs(Solver<overlap_graphs::OverlapGraphs>),
 }
 
 impl Commands {
@@ -66,6 +67,7 @@ impl Commands {
             Self::MortalFibonacciRabbits(cmd) => cmd.run(),
             Self::InferringMrnaFromProtein(cmd) => cmd.run(),
             Self::IndependentAlleles(cmd) => cmd.run(),
+            Self::OverlapGraphs(cmd) => cmd.run(),
         }
     }
 }

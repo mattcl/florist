@@ -70,6 +70,7 @@ mod tests {
     use locating_restriction_sites::LocatingRestrictionSites;
     use mendels_first_law::MendelsFirstLaw;
     use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
+    use overlap_graphs::SortedOverlapGraphs;
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
     use translating_rna_into_protein::TranslatingRnaIntoProtein;
@@ -226,5 +227,12 @@ mod tests {
         "rosalind_lia.txt",
         IndependentAlleles,
         "0.30060220579105046"
+    );
+
+    test_case_extern_solution!(
+        overlap_graphs,
+        "rosalind_grph.txt",
+        SortedOverlapGraphs,
+        "overlap_graphs.txt"
     );
 }
