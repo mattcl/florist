@@ -42,6 +42,8 @@ pub(crate) enum Commands {
     ),
     LocatingRestrictionSites(Solver<locating_restriction_sites::LocatingRestrictionSites>),
     MortalFibonacciRabbits(Solver<mortal_fibonacci_rabbits::MortalFibonacciRabbits>),
+    InferringMrnaFromProtein(Solver<inferring_mrna_from_protein::InferringMrnaFromProtein>),
+    IndependentAlleles(Solver<independent_alleles::IndependentAlleles>),
 }
 
 impl Commands {
@@ -62,6 +64,8 @@ impl Commands {
             Self::CalculatingExpectedOffspring(cmd) => cmd.run(),
             Self::LocatingRestrictionSites(cmd) => cmd.run(),
             Self::MortalFibonacciRabbits(cmd) => cmd.run(),
+            Self::InferringMrnaFromProtein(cmd) => cmd.run(),
+            Self::IndependentAlleles(cmd) => cmd.run(),
         }
     }
 }

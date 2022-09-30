@@ -23,6 +23,8 @@ members = [
     "calculating-expected-offspring",
     "locating-restriction-sites",
     "mortal-fibonacci-rabbits",
+    "inferring-mrna-from-protein",
+    "independent-alleles",
 ]
 
 [workspace.dependencies]

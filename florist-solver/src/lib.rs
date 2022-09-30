@@ -65,6 +65,8 @@ mod tests {
     use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
     use finding_a_motif_in_dna::FindingAMotifInDna;
     use florist_plumbing::{load_input_file, Problem};
+    use independent_alleles::IndependentAlleles;
+    use inferring_mrna_from_protein::InferringMrnaFromProtein;
     use locating_restriction_sites::LocatingRestrictionSites;
     use mendels_first_law::MendelsFirstLaw;
     use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
@@ -210,5 +212,19 @@ mod tests {
         "rosalind_fibd.txt",
         MortalFibonacciRabbits,
         "258314806822396236"
+    );
+
+    test_case!(
+        inferring_mrna_from_protein,
+        "rosalind_mrna.txt",
+        InferringMrnaFromProtein,
+        "549056"
+    );
+
+    test_case!(
+        independent_alleles,
+        "rosalind_lia.txt",
+        IndependentAlleles,
+        "0.30060220579105046"
     );
 }

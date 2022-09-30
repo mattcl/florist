@@ -80,6 +80,32 @@ impl AminoAcid {
             _ => 0.0,
         }
     }
+
+    pub fn num_codons(&self) -> u32 {
+        match self {
+            Self::Alanine => 4,
+            Self::Arginine => 6,
+            Self::Asparagine => 2,
+            Self::AsparticAcid => 2,
+            Self::Cysteine => 2,
+            Self::GlutamicAcid => 2,
+            Self::Glutamine => 2,
+            Self::Glycine => 4,
+            Self::Histidine => 2,
+            Self::Isoleucine => 3,
+            Self::Leucine => 6,
+            Self::Lysine => 2,
+            Self::Methionine => 1,
+            Self::Phenylalanine => 2,
+            Self::Proline => 4,
+            Self::Serine => 6,
+            Self::Threonine => 4,
+            Self::Tryptophan => 1,
+            Self::Tyrosine => 2,
+            Self::Valine => 4,
+            _ => 3,
+        }
+    }
 }
 
 impl TryFrom<char> for AminoAcid {

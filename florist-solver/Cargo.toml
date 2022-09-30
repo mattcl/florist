@@ -22,6 +22,8 @@ finding-a-motif-in-dna = { path = "../finding-a-motif-in-dna" }
 calculating-expected-offspring = { path = "../calculating-expected-offspring" }
 locating-restriction-sites = { path = "../locating-restriction-sites" }
 mortal-fibonacci-rabbits = { path = "../mortal-fibonacci-rabbits" }
+inferring-mrna-from-protein = { path = "../inferring-mrna-from-protein" }
+independent-alleles = { path = "../independent-alleles" }
 
 [dev-dependencies]
 criterion = "0.4.0"

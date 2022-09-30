@@ -10,6 +10,8 @@ use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
 use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
 use finding_a_motif_in_dna::FindingAMotifInDna;
+use independent_alleles::IndependentAlleles;
+use inferring_mrna_from_protein::InferringMrnaFromProtein;
 use locating_restriction_sites::LocatingRestrictionSites;
 use mendels_first_law::MendelsFirstLaw;
 use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
@@ -108,6 +110,18 @@ florist_benches! {
         "Mortal Fibonacci Rabbits",
         "rosalind_fibd.txt",
         MortalFibonacciRabbits
+    ),
+    (
+        inferring_mrna_from_protein,
+        "Inferring mRNA from Protein",
+        "rosalind_mrna.txt",
+        InferringMrnaFromProtein
+    ),
+    (
+        independent_alleles,
+        "Independent Alleles",
+        "rosalind_lia.txt",
+        IndependentAlleles
     )
 }
 
