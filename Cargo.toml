@@ -26,6 +26,7 @@ members = [
     "inferring-mrna-from-protein",
     "independent-alleles",
     "overlap-graphs",
+    "consensus-and-profile",
 ]
 
 [workspace.dependencies]

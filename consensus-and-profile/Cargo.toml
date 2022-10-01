@@ -1,0 +1,11 @@
+[package]
+name = "consensus-and-profile"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+florist-core = { path = "../florist-core" }
+florist-fasta = { path = "../florist-fasta" }
+florist-plumbing = { path = "../florist-plumbing" }

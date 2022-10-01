@@ -25,6 +25,7 @@ mortal-fibonacci-rabbits = { path = "../mortal-fibonacci-rabbits" }
 inferring-mrna-from-protein = { path = "../inferring-mrna-from-protein" }
 independent-alleles = { path = "../independent-alleles" }
 overlap-graphs = { path = "../overlap-graphs" }
+consensus-and-profile = { path = "../consensus-and-profile" }
 
 [dev-dependencies]
 criterion = "0.4.0"

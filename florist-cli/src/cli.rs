@@ -45,6 +45,7 @@ pub(crate) enum Commands {
     InferringMrnaFromProtein(Solver<inferring_mrna_from_protein::InferringMrnaFromProtein>),
     IndependentAlleles(Solver<independent_alleles::IndependentAlleles>),
     OverlapGraphs(Solver<overlap_graphs::OverlapGraphs>),
+    ConsensusAndProfile(Solver<consensus_and_profile::ConsensusAndProfile>),
 }
 
 impl Commands {
@@ -68,6 +69,7 @@ impl Commands {
             Self::InferringMrnaFromProtein(cmd) => cmd.run(),
             Self::IndependentAlleles(cmd) => cmd.run(),
             Self::OverlapGraphs(cmd) => cmd.run(),
+            Self::ConsensusAndProfile(cmd) => cmd.run(),
         }
     }
 }

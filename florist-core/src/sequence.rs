@@ -1,3 +1,4 @@
+//! Defines special string sequences and tools for working with them.
 use std::{
     fmt::Display,
     hash::Hash,
@@ -6,11 +7,32 @@ use std::{
     str::{Chars, FromStr},
 };
 
-use itertools::{Itertools, Tuples};
+use itertools::{join, Itertools, Tuples};
+use rustc_hash::FxHashMap;
 
 use crate::{AminoAcid, DNACodon, Error, RNACodon};
 
-pub trait Sequence: FromStr + Display + std::fmt::Debug + Clone + Eq + PartialEq + Hash {}
+pub trait Sequence:
+    FromStr
+    + TryFrom<String>
+    + Display
+    + std::fmt::Debug
+    + Clone
+    + Eq
+    + PartialEq
+    + Hash
+    + Deref<Target = String>
+{
+    const SYMBOLS: &'static str;
+
+    fn new_unchecked(val: String) -> Self;
+
+    fn is_valid_char(ch: char) -> bool;
+
+    fn symbols() -> Chars<'static> {
+        Self::SYMBOLS.chars()
+    }
+}
 
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct DNASequence(String);
@@ -50,7 +72,17 @@ impl DNASequence {
     }
 }
 
-impl Sequence for DNASequence {}
+impl Sequence for DNASequence {
+    const SYMBOLS: &'static str = "ACGT";
+
+    fn new_unchecked(val: String) -> Self {
+        Self(val)
+    }
+
+    fn is_valid_char(ch: char) -> bool {
+        matches!(ch, 'A' | 'C' | 'G' | 'T')
+    }
+}
 
 impl Deref for DNASequence {
     type Target = String;
@@ -75,8 +107,8 @@ impl FromStr for DNASequence {
         }
 
         for ch in s.chars() {
-            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'T') {
-                return Err(Error::InvalidDNASequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
@@ -93,8 +125,8 @@ impl TryFrom<String> for DNASequence {
         }
 
         for ch in value.chars() {
-            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'T') {
-                return Err(Error::InvalidDNASequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
@@ -105,7 +137,17 @@ impl TryFrom<String> for DNASequence {
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct RNASequence(String);
 
-impl Sequence for RNASequence {}
+impl Sequence for RNASequence {
+    const SYMBOLS: &'static str = "ACGU";
+
+    fn new_unchecked(val: String) -> Self {
+        Self(val)
+    }
+
+    fn is_valid_char(ch: char) -> bool {
+        matches!(ch, 'A' | 'C' | 'G' | 'U')
+    }
+}
 
 impl Deref for RNASequence {
     type Target = String;
@@ -130,8 +172,8 @@ impl FromStr for RNASequence {
         }
 
         for ch in s.chars() {
-            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'U') {
-                return Err(Error::InvalidRNASequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
@@ -148,8 +190,8 @@ impl TryFrom<String> for RNASequence {
         }
 
         for ch in value.chars() {
-            if !(ch == 'A' || ch == 'C' || ch == 'G' || ch == 'U') {
-                return Err(Error::InvalidRNASequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
@@ -193,54 +235,6 @@ impl GCContent for RNASequence {
     }
 }
 
-pub trait HammingDistance<Other = Self> {
-    type Error;
-
-    fn hamming_distance(&self, other: &Other) -> Result<u64, Self::Error>;
-}
-
-impl HammingDistance for DNASequence {
-    type Error = Error;
-
-    fn hamming_distance(&self, other: &Self) -> Result<u64, Self::Error> {
-        if self.len() != other.len() {
-            return Err(Error::NotEqualLength);
-        }
-
-        let mut count = 0;
-        let mut pairs = self.chars().zip(other.chars());
-
-        while let Some((my, their)) = pairs.next() {
-            if my != their {
-                count += 1;
-            }
-        }
-
-        Ok(count)
-    }
-}
-
-impl HammingDistance for RNASequence {
-    type Error = Error;
-
-    fn hamming_distance(&self, other: &Self) -> Result<u64, Self::Error> {
-        if self.len() != other.len() {
-            return Err(Error::NotEqualLength);
-        }
-
-        let mut count = 0;
-        let mut pairs = self.chars().zip(other.chars());
-
-        while let Some((my, their)) = pairs.next() {
-            if my != their {
-                count += 1;
-            }
-        }
-
-        Ok(count)
-    }
-}
-
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct ProteinSequence(String);
 
@@ -255,7 +249,19 @@ impl ProteinSequence {
     }
 }
 
-impl Sequence for ProteinSequence {}
+impl Sequence for ProteinSequence {
+    const SYMBOLS: &'static str = "ACDEFGHIKLMNPQRSTVWY";
+
+    fn new_unchecked(val: String) -> Self {
+        Self(val)
+    }
+
+    fn is_valid_char(ch: char) -> bool {
+        ch.is_ascii_uppercase()
+            && ch.is_ascii_alphabetic()
+            && !matches!(ch, 'B' | 'J' | 'O' | 'U' | 'X' | 'Z')
+    }
+}
 
 impl Deref for ProteinSequence {
     type Target = String;
@@ -280,16 +286,8 @@ impl FromStr for ProteinSequence {
         }
 
         for ch in s.chars() {
-            if !ch.is_ascii_uppercase()
-                || !ch.is_ascii_alphabetic()
-                || ch == 'B'
-                || ch == 'J'
-                || ch == 'O'
-                || ch == 'U'
-                || ch == 'X'
-                || ch == 'Z'
-            {
-                return Err(Error::InvalidProteinSequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
@@ -306,20 +304,39 @@ impl TryFrom<String> for ProteinSequence {
         }
 
         for ch in value.chars() {
-            if !ch.is_ascii_uppercase()
-                || !ch.is_ascii_alphabetic()
-                || ch == 'B'
-                || ch == 'J'
-                || ch == 'O'
-                || ch == 'U'
-                || ch == 'X'
-                || ch == 'Z'
-            {
-                return Err(Error::InvalidProteinSequence(ch));
+            if !Self::is_valid_char(ch) {
+                return Err(Error::InvalidSequenceCharacter(ch));
             }
         }
 
         Ok(Self(value))
+    }
+}
+
+pub trait HammingDistance<Other = Self> {
+    type Error;
+
+    fn hamming_distance(&self, other: &Other) -> Result<u64, Self::Error>;
+}
+
+impl<T: Sequence> HammingDistance for T {
+    type Error = Error;
+
+    fn hamming_distance(&self, other: &Self) -> Result<u64, Self::Error> {
+        if self.len() != other.len() {
+            return Err(Error::NotEqualLength);
+        }
+
+        let mut count = 0;
+        let mut pairs = self.chars().zip(other.chars());
+
+        while let Some((my, their)) = pairs.next() {
+            if my != their {
+                count += 1;
+            }
+        }
+
+        Ok(count)
     }
 }
 
@@ -398,7 +415,7 @@ pub trait Motif {
     fn motif_lcoations(&self, motif: &Self) -> Vec<usize>;
 }
 
-impl Motif for DNASequence {
+impl<T: Sequence> Motif for T {
     fn motif_lcoations(&self, motif: &Self) -> Vec<usize> {
         // we know we only allow a small subset of ascii chars, so the bytes in
         // the sequence and motif are going to be individual chars.
@@ -420,5 +437,77 @@ impl Motif for DNASequence {
         }
 
         indicies
+    }
+}
+
+pub struct Consensus<T: Sequence> {
+    sequence: T,
+    frequencies: FxHashMap<char, Vec<usize>>,
+}
+
+impl<'a, T: Sequence + 'a> Consensus<T> {
+    pub fn sequence(&self) -> &T {
+        &self.sequence
+    }
+
+    pub fn frequencies(&self) -> &FxHashMap<char, Vec<usize>> {
+        &self.frequencies
+    }
+
+    pub fn try_from_iter<I: Iterator<Item = &'a T>>(iter: I) -> Result<Self, Error> {
+        let seqs: Vec<_> = iter.map(|s| s.as_bytes()).collect();
+
+        if seqs.is_empty() {
+            return Err(Error::NoSequences);
+        }
+
+        if !seqs.iter().map(|s| s.len()).all_equal() {
+            // inequal length error
+            return Err(Error::NotEqualLength);
+        }
+
+        let len = seqs[0].len();
+
+        let mut frequencies: FxHashMap<char, Vec<usize>> =
+            FxHashMap::from_iter(T::symbols().map(|s| (s, vec![0; len])));
+
+        let mut sequence = String::with_capacity(len);
+
+        for i in 0..seqs[0].len() {
+            let mut counts: FxHashMap<char, usize> = FxHashMap::default();
+
+            for s in 0..seqs.len() {
+                // we're okay casting because we _know_ our sequences are ascii
+                counts
+                    .entry(seqs[s][i] as char)
+                    .and_modify(|e| *e += 1)
+                    .or_insert(1);
+            }
+
+            // we know this can't be empty, so unwrapping is fine
+            let (ch, _) = counts.iter().sorted().max_by(|a, b| a.1.cmp(&b.1)).unwrap();
+            sequence.push(*ch);
+
+            for (ch, count) in counts.iter() {
+                frequencies.entry(*ch).and_modify(|e| e[i] = *count);
+            }
+        }
+
+        Ok(Self {
+            sequence: T::new_unchecked(sequence),
+            frequencies,
+        })
+    }
+}
+
+impl<T: Sequence> Display for Consensus<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let freqs = self
+            .frequencies
+            .iter()
+            .sorted_by_key(|e| e.0)
+            .map(|(k, v)| format!("{}: {}", k, join(v, " ")))
+            .join("\n");
+        write!(f, "{}\n{}", &self.sequence, freqs)
     }
 }

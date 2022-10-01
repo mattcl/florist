@@ -5,6 +5,7 @@ use calculating_expected_offspring::CalculatingExpectedOffspring;
 use calculating_protein_mass::CalculatingProteinMass;
 use complementing_a_strand_of_dna::ComplementingAStrandOfDna;
 use computing_gc_content::ComputingGcContent;
+use consensus_and_profile::ConsensusAndProfile;
 use counting_dna_nucleotides::CountingDnaNucleotides;
 use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
@@ -129,6 +130,12 @@ florist_benches! {
         "Overlap Graphs",
         "rosalind_grph.txt",
         OverlapGraphs
+    ),
+    (
+        consensus_and_profile,
+        "Consensus and Profile",
+        "rosalind_cons.txt",
+        ConsensusAndProfile
     )
 }
 
