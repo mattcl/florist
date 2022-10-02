@@ -29,6 +29,14 @@ pub enum AminoAcid {
 }
 
 impl AminoAcid {
+    pub fn is_start(&self) -> bool {
+        matches!(self, Self::Methionine)
+    }
+
+    pub fn is_stop(&self) -> bool {
+        matches!(self, Self::Opal | Self::Ochre | Self::Amber)
+    }
+
     pub fn abbreviation(&self) -> char {
         match self {
             Self::Alanine => 'A',

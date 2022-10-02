@@ -45,4 +45,7 @@ pub enum Error {
 
     #[error("Wrong number of values. Expected {desired} but got {actual}")]
     WrongNumberOfValues { desired: usize, actual: usize },
+
+    #[error("No valid protein could be made from the given sequence of codons")]
+    NoValidProtein,
 }

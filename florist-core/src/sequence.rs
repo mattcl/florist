@@ -341,21 +341,33 @@ impl<T: Sequence> HammingDistance for T {
 }
 
 pub trait GeneticSequence {
-    type Codon: TryInto<AminoAcid>;
+    type Codon: TryInto<AminoAcid, Error = Error>;
 
     fn codons(
         &self,
     ) -> Map<Tuples<Chars<'_>, (char, char, char)>, fn((char, char, char)) -> Self::Codon>;
 
     fn to_protein(&self) -> Result<ProteinSequence, <Self::Codon as TryInto<AminoAcid>>::Error> {
-        let s = self
-            .codons()
-            .map(|c| c.try_into().map(|acid| acid.abbreviation()))
-            // so we stop after the first stop
-            .take_while(|element| !matches!(element, &Ok('X')))
-            .collect::<Result<String, _>>()?;
+        let mut codons = self.codons();
 
-        Ok(ProteinSequence(s))
+        let mut output = String::new();
+        while let Some(cur) = codons.next() {
+            let marker: AminoAcid = cur.try_into()?;
+            if marker.is_start() {
+                output.push(marker.abbreviation());
+
+                while let Some(next) = codons.next() {
+                    let acid: AminoAcid = next.try_into()?;
+                    if acid.is_stop() {
+                        return Ok(ProteinSequence(output))
+                    } else {
+                        output.push(acid.abbreviation());
+                    }
+                }
+            }
+        }
+
+        Err(Error::NoValidProtein)
     }
 }
 
