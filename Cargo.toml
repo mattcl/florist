@@ -28,6 +28,7 @@ members = [
     "overlap-graphs",
     "consensus-and-profile",
     "open-reading-frames",
+    "rna-splicing",
 ]
 
 [workspace.dependencies]

@@ -73,6 +73,66 @@ impl FromStr for MultiFasta {
     }
 }
 
+#[derive(Debug, Clone, Default, Eq, PartialEq)]
+pub struct OrderedMultiFasta(Vec<(String, String)>);
+
+impl Deref for OrderedMultiFasta {
+    type Target = Vec<(String, String)>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl DerefMut for OrderedMultiFasta {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+impl FromStr for OrderedMultiFasta {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let mut lines = s.lines().peekable();
+
+        let mut sequences = Self::default();
+
+        while let Some(line) = lines.next() {
+            if line.starts_with('>') {
+                // we have a new sequence, and the current line is the
+                // description
+                let description = line.split_at(1).1.trim().to_owned();
+                let mut sequence_parts = Vec::new();
+
+                while let Some(seq) = lines.peek() {
+                    if seq.starts_with('>') {
+                        break;
+                    }
+
+                    // we can unwerap because we checked for presence as the
+                    // loop condition
+                    sequence_parts.push(lines.next().unwrap().trim());
+                }
+
+                if sequence_parts.is_empty() {
+                    return Err(Error::EmptySequence);
+                }
+
+                let sequence = sequence_parts.join("");
+
+                sequences.push((description, sequence));
+            }
+        }
+
+        if sequences.is_empty() {
+            return Err(Error::NoSequences);
+        }
+
+        Ok(sequences)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

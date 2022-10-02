@@ -19,6 +19,7 @@ use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
 use open_reading_frames::OpenReadingFrames;
 use overlap_graphs::OverlapGraphs;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
+use rna_splicing::RnaSplicing;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
 use translating_rna_into_protein::TranslatingRnaIntoProtein;
 
@@ -143,6 +144,12 @@ florist_benches! {
         "Open Reading Frames",
         "rosalind_orf.txt",
         OpenReadingFrames
+    ),
+    (
+        rns_splicing,
+        "RNA Splicing",
+        "rosalind_splc.txt",
+        RnaSplicing
     )
 }
 

@@ -47,6 +47,7 @@ pub(crate) enum Commands {
     OverlapGraphs(Solver<overlap_graphs::OverlapGraphs>),
     ConsensusAndProfile(Solver<consensus_and_profile::ConsensusAndProfile>),
     OpenReadingFrames(Solver<open_reading_frames::OpenReadingFrames>),
+    RnaSplicing(Solver<rna_splicing::RnaSplicing>),
 }
 
 impl Commands {
@@ -72,6 +73,7 @@ impl Commands {
             Self::OverlapGraphs(cmd) => cmd.run(),
             Self::ConsensusAndProfile(cmd) => cmd.run(),
             Self::OpenReadingFrames(cmd) => cmd.run(),
+            Self::RnaSplicing(cmd) => cmd.run(),
         }
     }
 }
