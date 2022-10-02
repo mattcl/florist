@@ -37,3 +37,4 @@ overlap-graphs = { path = "../overlap-graphs" }
 consensus-and-profile = { path = "../consensus-and-profile" }
 open-reading-frames = { path = "../open-reading-frames" }
 rna-splicing = { path = "../rna-splicing" }
+transitions-and-transversions = { path = "../transitions-and-transversions" }

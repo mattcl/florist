@@ -365,6 +365,74 @@ impl<T: Sequence> HammingDistance for T {
     }
 }
 
+pub trait Substitutable {
+    fn transition_transversion_ratio(&self, other: &Self) -> Result<f64, Error>;
+}
+
+impl Substitutable for DNASequence {
+    fn transition_transversion_ratio(&self, other: &Self) -> Result<f64, Error> {
+        if self.len() != other.len() {
+            return Err(Error::NotEqualLength);
+        }
+
+        let mut transitions = 0_u64;
+        let mut transversions = 0_u64;
+
+        let mut pairs = self.chars().zip(other.chars());
+
+        while let Some((my, their)) = pairs.next() {
+            if my != their {
+                if matches!(
+                    (my, their),
+                    ('A', 'G') | ('G', 'A') | ('C', 'T') | ('T', 'C')
+                ) {
+                    transitions += 1;
+                } else {
+                    transversions += 1;
+                }
+            }
+        }
+
+        if transversions == 0 {
+            return Ok(f64::NAN);
+        }
+
+        Ok(transitions as f64 / transversions as f64)
+    }
+}
+
+impl Substitutable for RNASequence {
+    fn transition_transversion_ratio(&self, other: &Self) -> Result<f64, Error> {
+        if self.len() != other.len() {
+            return Err(Error::NotEqualLength);
+        }
+
+        let mut transitions = 0_u64;
+        let mut transversions = 0_u64;
+
+        let mut pairs = self.chars().zip(other.chars());
+
+        while let Some((my, their)) = pairs.next() {
+            if my != their {
+                if matches!(
+                    (my, their),
+                    ('A', 'G') | ('G', 'A') | ('C', 'U') | ('U', 'C')
+                ) {
+                    transitions += 1;
+                } else {
+                    transversions += 1;
+                }
+            }
+        }
+
+        if transversions == 0 {
+            return Ok(f64::NAN);
+        }
+
+        Ok(transitions as f64 / transversions as f64)
+    }
+}
+
 pub trait GeneticSequence {
     type Codon: Codon + TryInto<AminoAcid, Error = Error>;
 

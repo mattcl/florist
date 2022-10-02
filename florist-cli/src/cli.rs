@@ -48,6 +48,7 @@ pub(crate) enum Commands {
     ConsensusAndProfile(Solver<consensus_and_profile::ConsensusAndProfile>),
     OpenReadingFrames(Solver<open_reading_frames::OpenReadingFrames>),
     RnaSplicing(Solver<rna_splicing::RnaSplicing>),
+    TransitionsAndTransversions(Solver<transitions_and_transversions::TransitionsAndTransversions>),
 }
 
 impl Commands {
@@ -74,6 +75,7 @@ impl Commands {
             Self::ConsensusAndProfile(cmd) => cmd.run(),
             Self::OpenReadingFrames(cmd) => cmd.run(),
             Self::RnaSplicing(cmd) => cmd.run(),
+            Self::TransitionsAndTransversions(cmd) => cmd.run(),
         }
     }
 }

@@ -21,6 +21,7 @@ use overlap_graphs::OverlapGraphs;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use rna_splicing::RnaSplicing;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
+use transitions_and_transversions::TransitionsAndTransversions;
 use translating_rna_into_protein::TranslatingRnaIntoProtein;
 
 florist_benches! {
@@ -150,6 +151,12 @@ florist_benches! {
         "RNA Splicing",
         "rosalind_splc.txt",
         RnaSplicing
+    ),
+    (
+        transitions_and_transversions,
+        "Transitions and Transversions",
+        "rosalind_tran.txt",
+        TransitionsAndTransversions
     )
 }
 

@@ -8,7 +8,7 @@ pub use codon::{DNACodon, RNACodon};
 pub use population::SingleGenePopulation;
 pub use sequence::{
     Consensus, DNASequence, GCContent, GeneticSequence, HammingDistance, Motif, ProteinSequence,
-    RNASequence, Sequence,
+    RNASequence, Sequence, Substitutable,
 };
 
 #[derive(Debug, thiserror::Error)]

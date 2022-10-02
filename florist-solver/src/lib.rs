@@ -76,6 +76,7 @@ mod tests {
     use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
     use rna_splicing::RnaSplicing;
     use transcribing_dna_into_rna::TranscribingDnaIntoRna;
+    use transitions_and_transversions::TransitionsAndTransversions;
     use translating_rna_into_protein::TranslatingRnaIntoProtein;
 
     macro_rules! test_case {
@@ -258,5 +259,12 @@ mod tests {
         "rosalind_splc.txt",
         RnaSplicing,
         "MRAHASYATLLSYTALRRTFMLMKCYFGGSNRRRPREDRSFYTRPIGMPEQSRKLDGTGSGRCLSYYRKCDSPPSSPQNVEINHRGSVHIIVVSLGEEIQVSTEPDSVPKRNTDTKRPYAHECSLPEKPGWSYELEVLYEPSYFLGSTSKGLFIREATVPAQIGGLPKQHCKAVGIGRLTHAITQGESTFP"
+    );
+
+    test_case!(
+        transitions_and_transversions,
+        "rosalind_tran.txt",
+        TransitionsAndTransversions,
+        "1.989010989010989"
     );
 }

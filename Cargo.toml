@@ -29,6 +29,7 @@ members = [
     "consensus-and-profile",
     "open-reading-frames",
     "rna-splicing",
+    "transitions-and-transversions",
 ]
 
 [workspace.dependencies]
