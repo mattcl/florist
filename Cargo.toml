@@ -27,6 +27,7 @@ members = [
     "independent-alleles",
     "overlap-graphs",
     "consensus-and-profile",
+    "open-reading-frames",
 ]
 
 [workspace.dependencies]

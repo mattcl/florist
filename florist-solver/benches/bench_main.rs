@@ -16,6 +16,7 @@ use inferring_mrna_from_protein::InferringMrnaFromProtein;
 use locating_restriction_sites::LocatingRestrictionSites;
 use mendels_first_law::MendelsFirstLaw;
 use mortal_fibonacci_rabbits::MortalFibonacciRabbits;
+use open_reading_frames::OpenReadingFrames;
 use overlap_graphs::OverlapGraphs;
 use rabbits_and_recurrence_relations::RabbitsAndRecurrenceRelations;
 use transcribing_dna_into_rna::TranscribingDnaIntoRna;
@@ -136,6 +137,12 @@ florist_benches! {
         "Consensus and Profile",
         "rosalind_cons.txt",
         ConsensusAndProfile
+    ),
+    (
+        open_reading_frames,
+        "Open Reading Frames",
+        "rosalind_orf.txt",
+        OpenReadingFrames
     )
 }
 

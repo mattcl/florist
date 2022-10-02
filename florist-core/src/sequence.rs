@@ -3,6 +3,7 @@ use std::{
     fmt::Display,
     hash::Hash,
     iter::Map,
+    marker::PhantomData,
     ops::Deref,
     str::{Chars, FromStr},
 };
@@ -10,7 +11,7 @@ use std::{
 use itertools::{join, Itertools, Tuples};
 use rustc_hash::FxHashMap;
 
-use crate::{AminoAcid, DNACodon, Error, RNACodon};
+use crate::{codon::Codon, AminoAcid, DNACodon, Error, RNACodon};
 
 pub trait Sequence:
     FromStr
@@ -31,6 +32,12 @@ pub trait Sequence:
 
     fn symbols() -> Chars<'static> {
         Self::SYMBOLS.chars()
+    }
+
+    fn frames(&self) -> Vec<Frame<Self>> {
+        (0..3)
+            .filter_map(|offset| Frame::new(self, offset))
+            .collect()
     }
 }
 
@@ -69,6 +76,14 @@ impl DNASequence {
 
     pub fn subsequence_unchecked(&self, start: usize, end: usize) -> Self {
         Self(String::from_utf8_lossy(&self.as_bytes()[start..end]).into())
+    }
+
+    pub fn open_frames(&self) -> Vec<Frame<Self>> {
+        let needle = "ATG";
+        self.0
+            .match_indices(needle)
+            .filter_map(|(i, _)| Frame::new(self, i))
+            .collect()
     }
 }
 
@@ -136,6 +151,16 @@ impl TryFrom<String> for DNASequence {
 
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
 pub struct RNASequence(String);
+
+impl RNASequence {
+    pub fn open_frames(&self) -> Vec<Frame<Self>> {
+        let needle = "AUG";
+        self.0
+            .match_indices(needle)
+            .filter_map(|(i, _)| Frame::new(self, i))
+            .collect()
+    }
+}
 
 impl Sequence for RNASequence {
     const SYMBOLS: &'static str = "ACGU";
@@ -341,7 +366,7 @@ impl<T: Sequence> HammingDistance for T {
 }
 
 pub trait GeneticSequence {
-    type Codon: TryInto<AminoAcid, Error = Error>;
+    type Codon: Codon + TryInto<AminoAcid, Error = Error>;
 
     fn codons(
         &self,
@@ -359,7 +384,7 @@ pub trait GeneticSequence {
                 while let Some(next) = codons.next() {
                     let acid: AminoAcid = next.try_into()?;
                     if acid.is_stop() {
-                        return Ok(ProteinSequence(output))
+                        return Ok(ProteinSequence(output));
                     } else {
                         output.push(acid.abbreviation());
                     }
@@ -391,6 +416,40 @@ impl GeneticSequence for RNASequence {
     }
 }
 
+#[derive(Debug, Clone, Copy, Default, Eq, PartialEq)]
+pub struct Frame<'a, T> {
+    sequence: &'a str,
+    _marker: PhantomData<T>,
+}
+
+impl<'a, T: Sequence> Frame<'a, T> {
+    fn new(sequence: &'a T, offset: usize) -> Option<Self> {
+        let slice = sequence.get(offset..)?;
+
+        if slice.is_empty() {
+            return None;
+        }
+
+        Some(Self {
+            sequence: slice,
+            _marker: PhantomData,
+        })
+    }
+}
+
+impl<'a, T: Sequence + GeneticSequence> GeneticSequence for Frame<'a, T> {
+    type Codon = <T as GeneticSequence>::Codon;
+
+    fn codons(
+        &self,
+    ) -> Map<Tuples<Chars<'_>, (char, char, char)>, fn((char, char, char)) -> Self::Codon> {
+        self.sequence
+            .chars()
+            .tuples()
+            .map(<T as GeneticSequence>::Codon::from_tuple_unchecked)
+    }
+}
+
 impl TryFrom<DNASequence> for ProteinSequence {
     type Error = Error;
 
@@ -419,6 +478,22 @@ impl TryFrom<&RNASequence> for ProteinSequence {
     type Error = Error;
 
     fn try_from(value: &RNASequence) -> Result<Self, Self::Error> {
+        value.to_protein()
+    }
+}
+
+impl<'a, T: Sequence + GeneticSequence> TryFrom<Frame<'a, T>> for ProteinSequence {
+    type Error = Error;
+
+    fn try_from(value: Frame<'a, T>) -> Result<Self, Self::Error> {
+        Self::try_from(&value)
+    }
+}
+
+impl<'a, T: Sequence + GeneticSequence> TryFrom<&Frame<'a, T>> for ProteinSequence {
+    type Error = Error;
+
+    fn try_from(value: &Frame<'a, T>) -> Result<Self, Self::Error> {
         value.to_protein()
     }
 }

@@ -2,12 +2,16 @@ use std::{fmt::Display, str::FromStr};
 
 use crate::Error;
 
+pub trait Codon: TryFrom<(char, char, char)> {
+    fn from_tuple_unchecked(v: (char, char, char)) -> Self;
+}
+
 #[derive(Debug, Clone, Copy, Default, Eq, PartialEq)]
 pub struct DNACodon(pub char, pub char, pub char);
 
-impl DNACodon {
+impl Codon for DNACodon {
     /// Only intended for supporting construction from rna sequences
-    pub(crate) fn from_tuple_unchecked(value: (char, char, char)) -> Self {
+    fn from_tuple_unchecked(value: (char, char, char)) -> Self {
         Self(value.0, value.1, value.2)
     }
 }
@@ -55,9 +59,9 @@ impl Display for DNACodon {
 #[derive(Debug, Clone, Copy, Default, Eq, PartialEq)]
 pub struct RNACodon(pub char, pub char, pub char);
 
-impl RNACodon {
+impl Codon for RNACodon {
     /// Only intended for supporting construction from rna sequences
-    pub(crate) fn from_tuple_unchecked(value: (char, char, char)) -> Self {
+    fn from_tuple_unchecked(value: (char, char, char)) -> Self {
         Self(value.0, value.1, value.2)
     }
 }

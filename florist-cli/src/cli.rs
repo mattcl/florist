@@ -46,6 +46,7 @@ pub(crate) enum Commands {
     IndependentAlleles(Solver<independent_alleles::IndependentAlleles>),
     OverlapGraphs(Solver<overlap_graphs::OverlapGraphs>),
     ConsensusAndProfile(Solver<consensus_and_profile::ConsensusAndProfile>),
+    OpenReadingFrames(Solver<open_reading_frames::OpenReadingFrames>),
 }
 
 impl Commands {
@@ -70,6 +71,7 @@ impl Commands {
             Self::IndependentAlleles(cmd) => cmd.run(),
             Self::OverlapGraphs(cmd) => cmd.run(),
             Self::ConsensusAndProfile(cmd) => cmd.run(),
+            Self::OpenReadingFrames(cmd) => cmd.run(),
         }
     }
 }
