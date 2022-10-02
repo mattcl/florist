@@ -64,6 +64,7 @@ mod tests {
     use counting_point_mutations::CountingPointMutations;
     use enumerating_gene_orders::EnumeratingGeneOrders;
     use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
+    use enumerating_oriented_gene_orderings::EnumeratingOrientedGeneOrderings;
     use finding_a_motif_in_dna::FindingAMotifInDna;
     use florist_plumbing::{load_input_file, Problem};
     use independent_alleles::IndependentAlleles;
@@ -266,5 +267,12 @@ mod tests {
         "rosalind_tran.txt",
         TransitionsAndTransversions,
         "1.989010989010989"
+    );
+
+    test_case_extern_solution!(
+        enumerating_oriented_gene_orderings,
+        "rosalind_sign.txt",
+        EnumeratingOrientedGeneOrderings,
+        "enumerating_oriented_gene_orderings.txt"
     );
 }

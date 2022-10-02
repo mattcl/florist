@@ -49,6 +49,9 @@ pub(crate) enum Commands {
     OpenReadingFrames(Solver<open_reading_frames::OpenReadingFrames>),
     RnaSplicing(Solver<rna_splicing::RnaSplicing>),
     TransitionsAndTransversions(Solver<transitions_and_transversions::TransitionsAndTransversions>),
+    EnumeratingOrientedGeneOrderings(
+        Solver<enumerating_oriented_gene_orderings::EnumeratingOrientedGeneOrderings>,
+    ),
 }
 
 impl Commands {
@@ -76,6 +79,7 @@ impl Commands {
             Self::OpenReadingFrames(cmd) => cmd.run(),
             Self::RnaSplicing(cmd) => cmd.run(),
             Self::TransitionsAndTransversions(cmd) => cmd.run(),
+            Self::EnumeratingOrientedGeneOrderings(cmd) => cmd.run(),
         }
     }
 }

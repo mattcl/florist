@@ -29,6 +29,7 @@ consensus-and-profile = { path = "../consensus-and-profile" }
 open-reading-frames = { path = "../open-reading-frames" }
 rna-splicing = { path = "../rna-splicing" }
 transitions-and-transversions = { path = "../transitions-and-transversions" }
+enumerating-oriented-gene-orderings = { path = "../enumerating-oriented-gene-orderings" }
 
 [dev-dependencies]
 criterion = "0.4.0"

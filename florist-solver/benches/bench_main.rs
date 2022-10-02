@@ -10,6 +10,7 @@ use counting_dna_nucleotides::CountingDnaNucleotides;
 use counting_point_mutations::CountingPointMutations;
 use enumerating_gene_orders::EnumeratingGeneOrders;
 use enumerating_k_mers_lexicographically::EnumeratingKMersLexicographically;
+use enumerating_oriented_gene_orderings::EnumeratingOrientedGeneOrderings;
 use finding_a_motif_in_dna::FindingAMotifInDna;
 use independent_alleles::IndependentAlleles;
 use inferring_mrna_from_protein::InferringMrnaFromProtein;
@@ -157,6 +158,12 @@ florist_benches! {
         "Transitions and Transversions",
         "rosalind_tran.txt",
         TransitionsAndTransversions
+    ),
+    (
+        enumerating_oriented_gene_orderings,
+        "Enumerating Oriented Gene Orderings",
+        "rosalind_sign.txt",
+        EnumeratingOrientedGeneOrderings
     )
 }
 

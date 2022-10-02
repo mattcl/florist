@@ -30,6 +30,7 @@ members = [
     "open-reading-frames",
     "rna-splicing",
     "transitions-and-transversions",
+    "enumerating-oriented-gene-orderings",
 ]
 
 [workspace.dependencies]
